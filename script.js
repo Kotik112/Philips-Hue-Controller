@@ -1,6 +1,3 @@
-const USERNAME = "i3DYODcqEGZqbOaO3cUyQgthbv3UVj7XFmJJjizP"
-const baseUrl = "http://192.168.1.128/api/"
-
 const TABLE_LIGHT = 1;
 const SHELF_LIGHT = 2;
 const HUE_GO = 3;
