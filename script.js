@@ -1,3 +1,19 @@
+/*
+* NOTE! Work in progress!
+*
+* Program that will control all the Philips Hue lights in my household. Tailor made for my personal needs.
+* The script talks to the Philips Hue Bridge API (v2) to control the lights.
+*
+* The program is currently written in vanilla javascript, but I intend to rework the front end in react.js
+*
+* Arman I.
+* */
+
+// Username for the api - reference => https://developers.meethue.com/develop/get-started-2/
+const USERNAME = "";
+const BASE_URL = "http://<bridge ip address>/api/";
+
+//Constants representing the unique id for each lamp.
 const TABLE_LIGHT = 1;
 const SHELF_LIGHT = 2;
 const HUE_GO = 3;
@@ -9,18 +25,20 @@ const IM_SPOT_1 = 10;
 const IM_SPOT_2 = 11;
 const IM_SPOT_3 = 12;
 
+//Variable declarations
 let tableOn, tableOff, shelfOn, shelfOff, goOn, goOff, ceilingOn, ceilingOff, imTableOn, imTableOff,
         imSpotOn, imSpotOff, hallwayOn, hallwayOff, tableSlider;
 
 
+//
 const setLight = function (state, lightNumber) {
-    const URL_LIGHT = baseUrl + USERNAME + "/lights/" + lightNumber + "/state";
+    const URL_LIGHT = BASE_URL + USERNAME + "/lights/" + lightNumber + "/state";
     fetch(URL_LIGHT, {method: "PUT",
     body: JSON.stringify({"on": state})
     })
 }
 
-
+//Turn off the light depending on which event id called it.
 const lightOff = function (event) {
     if (event.target.id === "table-off") setLight(false, TABLE_LIGHT);
     else if (event.target.id === "shelf-off") setLight(false, SHELF_LIGHT);
@@ -40,6 +58,7 @@ const lightOff = function (event) {
 
 }
 
+//Turn on the light depending on which event id called it.
 const lightOn = function (event) {
     if (event.target.id === "table-on") setLight(true, TABLE_LIGHT);
     else if (event.target.id === "shelf-on") setLight(true, SHELF_LIGHT);
@@ -58,8 +77,9 @@ const lightOn = function (event) {
     else console.log("Light on else statement");
 }
 
+//Changes the brightness of lights.
 const setBrightness = function (brightness, lightNumber) {
-    const URL_BRIGHTNESS = baseUrl + USERNAME + "/lights/" + lightNumber + "/state";
+    const URL_BRIGHTNESS = BASE_URL + USERNAME + "/lights/" + lightNumber + "/state";
     //console.log ("Running");
     fetch(URL_BRIGHTNESS, {method: "PUT",
     body: JSON.stringify({"bri":brightness})
@@ -72,6 +92,7 @@ const dimHandler = function (event) {
     }
 }
 
+//Setup function setting up all elements needed for the project.
 const setup = function () {
     //Table lights
     tableOn = document.getElementById("table-on");
