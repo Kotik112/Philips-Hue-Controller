@@ -1,6 +1,4 @@
-# Philips Hue Controller (Work in progress)
-
-Note: This project is a work in progress!
+# Philips Hue Controller
 
 Documentation used:
 https://developers.meethue.com/develop/get-started-2/
